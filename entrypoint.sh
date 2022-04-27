@@ -1,6 +1,8 @@
 #!/bin/bash
 
-#set -e
+set -e
+
+[ -s /run/php-fpm/php-fpm.pid ] || php-fpm -D
 
 case $1 in
 
@@ -9,7 +11,6 @@ case $1 in
     ;;
 
   serve)
-      php-fpm -D
       nginx -g "daemon off;"
     ;;
 
