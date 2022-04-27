@@ -2,8 +2,6 @@
 
 set -e
 
-[ -s /run/php-fpm/php-fpm.pid ] || php-fpm -D
-
 case $1 in
 
   create)
@@ -11,7 +9,13 @@ case $1 in
     ;;
 
   serve)
+      php-fpm -D
       nginx -g "daemon off;"
+
+      fpm_pid=$(cat /run/php-fpm/php-fpm.pid)
+
+      kill $fpm_pid
+      echo Stopped php-fpm pid: $fpm_pid
     ;;
 
   *)

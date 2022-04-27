@@ -28,11 +28,11 @@ ENV XDEBUG_MODE="off"
 
 RUN mkdir -p /var/lib/nginx/ &&\
     mkdir -p /var/log/nginx/ &&\
-    touch /run/nginx.pid &&\
+    mkdir -p /run/nginx/ &&\
     chown ${USER_NAME}:${USER_GROUP} -R ${PROJECT_ROOT} &&\
     chown ${USER_NAME}:${USER_GROUP} -R /var/log/nginx && \
     chown ${USER_NAME}:${USER_GROUP} -R /var/lib/nginx && \
-    chown ${USER_NAME}:${USER_GROUP} -R /run/nginx.pid && \
+    chown ${USER_NAME}:${USER_GROUP} -R /run/nginx/ && \
     chown ${USER_NAME}:${USER_GROUP} -R /var/log/php-fpm/ && \
     chown ${USER_NAME}:${USER_GROUP} -R /run/php-fpm/
 
