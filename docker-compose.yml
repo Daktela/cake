@@ -1,0 +1,27 @@
+version: "3.3"
+
+services:
+
+  php-fpm:
+    build: Dockerfile
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - ./app/:/app/
+      - ./php-ini-overrides.ini:/etc/php.d/php-ini-overrides.ini
+
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - mysqlVolume:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    command: mysqld --character-set-server=utf8 --init-connect='SET NAMES UTF8;'
+
+volumes:
+  mysqlVolume:
