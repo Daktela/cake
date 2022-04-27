@@ -1,4 +1,4 @@
-FROM daktela/php-fpm:8
+FROM daktela/php-fpm:8.1
 
 # Install PHP and other packages
 RUN dnf -q -y update && \
