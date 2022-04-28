@@ -13,9 +13,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 # Prepare entrypoint
 ADD ./scripts/entrypoint.sh /usr/local/bin/
 ADD ./scripts/daktelaEntrypoint.sh /usr/local/bin/
+ADD ./scripts/wait-for-mysql.php /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/daktelaEntrypoint.sh
-ADD ./scripts/wait-for-mysql.php /tmp/
+RUN chmod +x /usr/local/bin/wait-for-mysql.php
 
 COPY ./config/nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY ./config/nginx/nginx.conf /etc/nginx/nginx.conf
