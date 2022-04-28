@@ -3,7 +3,7 @@ version: "3.3"
 services:
 
   php-fpm:
-    build: Dockerfile
+    build: ../Dockerfile
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}

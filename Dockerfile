@@ -11,12 +11,15 @@ RUN dnf -q -y update && \
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 # Prepare entrypoint
-ADD ./entrypoint.sh /usr/local/bin/
+ADD ./scripts/entrypoint.sh /usr/local/bin/
+ADD ./scripts/daktelaEntrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/daktelaEntrypoint.sh
+ADD ./scripts/wait-for-mysql.php /tmp/
 
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-COPY ./php-ini-xdebug.ini /etc/php.d/15-xdebug.ini
+COPY ./config/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./config/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./config/php/php-ini-xdebug.ini /etc/php.d/15-xdebug.ini
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 
