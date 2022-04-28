@@ -14,6 +14,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 ADD ./scripts/entrypoint.sh /usr/local/bin/
 ADD ./scripts/daktelaEntrypoint.sh /usr/local/bin/
 ADD ./scripts/wait-for-mysql.php /usr/local/bin/
+
 RUN chmod +x /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/daktelaEntrypoint.sh
 RUN chmod +x /usr/local/bin/wait-for-mysql.php
