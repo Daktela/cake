@@ -31,8 +31,6 @@ printf "${BLUE}Database connection ready!\n${NC}"
 
 printf "${BLUE}Database migrations ready!\n${NC}"
 
-
-
 php /usr/local/bin/wait-for-mysql.php
 
 printf "${BLUE}Database ready!\n${NC}"
