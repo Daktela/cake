@@ -1,9 +1,11 @@
 FROM daktela/php-fpm:8.1
 
+
 # Install PHP and other packages
 RUN dnf -q -y update && \
-    dnf -q -y install nginx php-xdebug node yarn && \
-    dnf clean all
+    dnf -q -y install nginx php-xdebug npm && \
+    dnf clean all && \
+    npm install -g yarn
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
