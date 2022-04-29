@@ -1,5 +1,8 @@
 #!/bin/bash
 
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
 set -e
 
 case $1 in
@@ -19,11 +22,11 @@ case $1 in
     ;;
 
   up)
-      echo "Bringing project up."
+      printf "${BLUE}Bringing project up.${NC}"
 
       /usr/local/bin/daktelaEntrypoint.sh
 
-      echo "Starting webserver."
+      printf "${BLUE}Starting webserver.${NC}"
 
       php-fpm -D
       nginx -g "daemon off;"

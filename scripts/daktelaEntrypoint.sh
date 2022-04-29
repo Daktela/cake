@@ -11,7 +11,7 @@ composer install --prefer-dist --no-interaction --classmap-authoritative
 composer dump-autoload --optimize
 composer clear-cache --quiet
 
-printf "${BLUE}Composer ready!\n${NC}"
+printf "${BLUE}Composer ready!${NC}"
 
 echo "
   <?php
@@ -25,20 +25,20 @@ echo "
 
 php /usr/local/bin/wait-for-mysql.php
 
-printf "${BLUE}Database connection ready!\n${NC}"
+printf "${BLUE}Database connection ready!${NC}"
 
 ./bin/cake migrations migrate -vvv
 
-printf "${BLUE}Database migrations ready!\n${NC}"
+printf "${BLUE}Database migrations ready!${NC}"
 
 php /usr/local/bin/wait-for-mysql.php
 
-printf "${BLUE}Database ready!\n${NC}"
+printf "${BLUE}Database ready!${NC}"
 
 yarn install --frozen-lockfile
 
-printf "${BLUE}Yarn install done!\n${NC}"
+printf "${BLUE}Yarn install done!${NC}"
 
 ./bin/cake cache clear_all
 
-printf "${BLUE}Cake cache cleared!\n${NC}"
+printf "${BLUE}Cake cache cleared!${NC}"
