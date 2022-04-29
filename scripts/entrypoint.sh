@@ -5,8 +5,6 @@ NC='\033[0m' # No Color
 
 set -e
 
-export PATH="/var/www/html/bin/:$PATH"
-
 case $1 in
 
   create)
