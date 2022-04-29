@@ -27,7 +27,7 @@ php /usr/local/bin/wait-for-mysql.php
 
 printf "${BLUE}Database connection ready!${NC}\n"
 
-./bin/cake migrations migrate -vvv
+cake migrations migrate -vvv
 
 printf "${BLUE}Database migrations ready!${NC}\n"
 
@@ -39,6 +39,6 @@ yarn install --frozen-lockfile
 
 printf "${BLUE}Yarn install done!${NC}\n"
 
-./bin/cake cache clear_all
+cake cache clear_all
 
 printf "${BLUE}Cake cache cleared!${NC}\n"
