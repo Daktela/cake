@@ -22,11 +22,11 @@ case $1 in
     ;;
 
   up)
-      printf "${BLUE}Bringing project up.${NC}"
+      printf "${BLUE}Bringing project up.${NC}\n"
 
       /usr/local/bin/daktelaEntrypoint.sh
 
-      printf "${BLUE}Starting webserver.${NC}"
+      printf "${BLUE}Starting webserver.${NC}\n"
 
       php-fpm -D
       nginx -g "daemon off;"
