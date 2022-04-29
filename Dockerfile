@@ -46,7 +46,7 @@ RUN mkdir -p /var/lib/nginx/ &&\
 WORKDIR $PROJECT_ROOT
 USER ${USER_NAME}
 
-RUN export PATH="/var/www/html/bin/:$PATH"
+ENV PATH="/var/www/html/bin/:$PATH"
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
