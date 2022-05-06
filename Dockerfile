@@ -27,8 +27,6 @@ ENV USER_NAME=cake
 ENV USER_ID=99
 ENV USER_GUID=99
 
-RUN cat /etc/passwd
-
 RUN	groupadd -f ${USER_NAME} -g ${USER_GUID}
 RUN	useradd -s /bin/bash -g ${USER_NAME} -u ${USER_ID} ${USER_NAME}
 
