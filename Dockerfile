@@ -23,8 +23,14 @@ COPY ./config/nginx/nginx.conf /etc/nginx/nginx.conf
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 
-ENV USER_NAME=99
-ENV USER_GROUP=99
+ENV USER_NAME=cake
+ENV USER_ID=99
+ENV USER_GUID=99
+
+RUN cat /etc/passwd
+
+RUN	groupadd -f ${USER_NAME} -g ${USER_GUID}
+RUN	useradd -s /bin/bash -g ${USER_NAME} -u ${USER_ID} ${USER_NAME}
 
 ENV PROJECT_ROOT="/var/www/html/"
 
