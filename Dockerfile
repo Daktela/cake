@@ -26,9 +26,6 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/
 ENV USER_NAME=99
 ENV USER_GROUP=99
 
-RUN	addgroup -S nobody && \
-	adduser -S -G nobody nobody 
-
 ENV PROJECT_ROOT="/var/www/html/"
 
 RUN mkdir -p /var/lib/nginx/ &&\
