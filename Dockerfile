@@ -48,7 +48,7 @@ RUN mkdir -p /var/lib/nginx/ &&\
     chown ${USER_NAME}:${USER_GROUP} -R /var/log/php-fpm/ && \
     chown ${USER_NAME}:${USER_GROUP} -R /run/php-fpm/
 
-RUN sed 's/nginx/root/g' /etc/php-fpm.d/www.conf > /etc/php-fpm.d/www.conf
+RUN sed -i 's/nginx/root/g' /etc/php-fpm.d/www.conf
 
 WORKDIR $PROJECT_ROOT
 
