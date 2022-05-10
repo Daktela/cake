@@ -26,8 +26,8 @@ COPY ./config/php/php-ini-xdebug.ini /etc/php.d/15-xdebug.ini
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 
 ENV USER_NAME=cake
-ENV USER_ID=99
-ENV USER_GUID=99
+ENV USER_ID=0           # root UID & GUID for development only!
+ENV USER_GUID=0
 ENV PROJECT_ROOT="/var/www/html/"
 
 RUN	groupadd -f ${USER_NAME} -g ${USER_GUID}
