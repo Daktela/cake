@@ -25,11 +25,18 @@ COPY ./config/php/php-ini-xdebug.ini /etc/php.d/15-xdebug.ini
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 
+ENV USER_NAME=cake   
+ENV USER_GROUP=cake   
+ENV USER_ID=99          
+ENV USER_GUID=99
 ENV PROJECT_ROOT="/var/www/html/"
 
 ENV XDEBUG_HOST=host.docker.internal
 ENV XDEBUG_LOG_LEVEL=1
 ENV XDEBUG_MODE="off"
+
+RUN	groupadd -f ${USER_NAME} -g ${USER_GUID}
+RUN	useradd -s /bin/bash -g ${USER_NAME} -u ${USER_ID} ${USER_NAME}
 
 RUN mkdir -p /var/lib/nginx/ &&\
     mkdir -p /var/log/nginx/ &&\
