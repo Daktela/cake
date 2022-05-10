@@ -29,6 +29,9 @@ ENV USER_NAME=1000
 ENV USER_GROUP=1000
 ENV PROJECT_ROOT="/var/www/html/"
 
+RUN	groupadd -f ${USER_NAME} -g ${USER_GUID}
+RUN	useradd -s /bin/bash -g ${USER_NAME} -u ${USER_ID} ${USER_NAME}
+
 ENV XDEBUG_HOST=host.docker.internal
 ENV XDEBUG_LOG_LEVEL=1
 ENV XDEBUG_MODE="off"
