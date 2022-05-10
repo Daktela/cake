@@ -27,8 +27,8 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/
 
 ENV USER_NAME=cake   
 ENV USER_GROUP=cake   
-ENV USER_ID=99          
-ENV USER_GUID=99
+ENV USER_ID=1000
+ENV USER_GUID=1000
 ENV PROJECT_ROOT="/var/www/html/"
 
 ENV XDEBUG_HOST=host.docker.internal
@@ -48,7 +48,7 @@ RUN mkdir -p /var/lib/nginx/ &&\
     chown ${USER_NAME}:${USER_GROUP} -R /var/log/php-fpm/ && \
     chown ${USER_NAME}:${USER_GROUP} -R /run/php-fpm/
 
-RUN sed -i 's/nginx/root/g' /etc/php-fpm.d/www.conf
+RUN sed -i 's/nginx/cake/g' /etc/php-fpm.d/www.conf
 
 WORKDIR $PROJECT_ROOT
 
