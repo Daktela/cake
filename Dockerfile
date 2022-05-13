@@ -5,6 +5,7 @@ RUN dnf -q -y update && \
     dnf -q -y install nginx php-xdebug git curl && \
     dnf clean all
     
+ARG NODE_VERSION=16.15.0
 ENV NVM_DIR /usr/bin/nvm
 ENV PATH="$NVM_DIR/versions/node/v$NODE_VERSION/bin/:/app/node_modules/.bin:${PATH}"
 RUN mkdir -p $NVM_DIR
