@@ -3,9 +3,21 @@ FROM daktela/php-fpm:8.1
 
 # Install PHP and other packages
 RUN dnf -q -y update && \
-    dnf -q -y install nginx php-xdebug npm && \
-    dnf clean all && \
-    npm install -g yarn
+    dnf -q -y install nginx php-xdebug git curl && \
+    dnf clean all
+    
+ARG NODE_VERSION=16.15.0
+ENV NVM_DIR /usr/bin/nvm
+ENV PATH="$NVM_DIR/versions/node/v$NODE_VERSION/bin/:/app/node_modules/.bin:${PATH}"
+RUN mkdir -p $NVM_DIR
+
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash \
+    && . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+
+RUN npm install --silent --global yarn
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
