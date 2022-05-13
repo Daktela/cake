@@ -2,7 +2,7 @@ FROM daktela/php-fpm:8.1
 
 # Install PHP and other packages
 RUN dnf -q -y update && \
-    dnf -q -y install nginx php-xdebug && \
+    dnf -q -y install nginx php-xdebug git curl && \
     dnf clean all
     
 ENV NVM_DIR /usr/bin/nvm
