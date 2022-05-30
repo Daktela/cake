@@ -13,6 +13,8 @@ composer clear-cache --quiet
 
 printf "${BLUE}Composer ready!${NC}\n"
 
+export $(cat .env | xargs)
+
 echo "
   <?php
     \$dsn['$MYSQL_DATABASE'] = [
@@ -27,7 +29,7 @@ php /usr/local/bin/wait-for-mysql.php
 
 printf "${BLUE}Database connection ready!${NC}\n"
 
-cake migrations migrate -vvv
+env -i /var/www/html/bin/cake migrations migrate -vvv
 
 printf "${BLUE}Database migrations ready!${NC}\n"
 
@@ -39,6 +41,6 @@ yarn install --frozen-lockfile
 
 printf "${BLUE}Yarn install done!${NC}\n"
 
-cake cache clear_all
+env -i /var/www/html/bin/cake cache clear_all
 
 printf "${BLUE}Cake cache cleared!${NC}\n"
