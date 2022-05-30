@@ -2,7 +2,17 @@
 
 $dsn = [];
 
-require "/tmp/databases.php";
+require("vendor/autoload.php");
+
+$dotenv = new \josegonzalez\Dotenv\Loader(['.env']);
+$dotenv = $dotenv->parse()->toArray();
+
+$dsn[$dotenv['MYSQL_DATABASE']] = [
+        'dsn' => 'mysql:host='.$dotenv["MYSQL_HOST"].':3306;dbname='.$dotenv["MYSQL_DATABASE"],
+        'database' => $dotenv['MYSQL_DATABASE'],
+        'user' => $dotenv['MYSQL_USER'],
+        'pass' => $dotenv['MYSQL_PASSWORD']
+    ];
 
 $connections = [];
 $checked = [];
