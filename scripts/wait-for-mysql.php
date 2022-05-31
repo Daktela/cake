@@ -6,6 +6,8 @@ if (file_exists('/tmp/databases.php')) {
     include '/tmp/databases.php';
 } else {
 
+    require('vendor/autoload.php');
+    
     $dotenv = new \josegonzalez\Dotenv\Loader(['.env']);
     $dotenv = $dotenv->parse()->toArray();
 
