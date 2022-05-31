@@ -32,3 +32,5 @@ printf "${BLUE}Yarn install done!${NC}\n"
 cake cache clear_all
 
 printf "${BLUE}Cake cache cleared!${NC}\n"
+
+chmod 775 -R .
