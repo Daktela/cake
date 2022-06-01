@@ -13,7 +13,8 @@ composer clear-cache --quiet
 
 printf "${BLUE}Composer ready!${NC}\n"
 
-if [ $MYSQL_DATABASE ] then
+if [ $MYSQL_DATABASE ] 
+then
   echo "
     <?php
       \$dsn['$MYSQL_DATABASE'] = [
