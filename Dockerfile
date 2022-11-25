@@ -40,7 +40,7 @@ RUN mkdir -p $PROJECT_ROOT && \
     chown ${USER_NAME}:${USER_GROUP} -R /var/log/nginx && \
     chown ${USER_NAME}:${USER_GROUP} -R /var/lib/nginx && \
     chown ${USER_NAME}:${USER_GROUP} -R /run/nginx/ && \
-    chown ${USER_NAME}:${USER_GROUP} -R /var/log/php-fpm/ && \
+    chown ${USER_NAME}:${USER_GROUP} -R /var/log/php81/ && \
     chown ${USER_NAME}:${USER_GROUP} -R /run/php-fpm/
 
 WORKDIR $PROJECT_ROOT
