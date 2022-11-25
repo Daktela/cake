@@ -36,6 +36,7 @@ RUN mkdir -p $PROJECT_ROOT && \
 	mkdir -p /var/lib/nginx/ &&\
     mkdir -p /var/log/nginx/ &&\
     mkdir -p /run/nginx/ &&\
+    mkdir -p /home/www/ &&\
     chown ${USER_NAME}:${USER_GROUP} -R ${PROJECT_ROOT} &&\
     chown ${USER_NAME}:${USER_GROUP} -R /var/log/nginx && \
     chown ${USER_NAME}:${USER_GROUP} -R /var/lib/nginx && \
