@@ -1,27 +1,24 @@
-version: "3.3"
+version: '2'
 
 services:
-
-  php-fpm:
-    build: ../Dockerfile
+  mariadb:
+    image: mariadb:latest
     environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    volumes:
-      - ./app/:/app/
-      - ./php-ini-overrides.ini:/etc/php.d/php-ini-overrides.ini
-
-  mysql:
-    image: mysql:8.0
-    volumes:
-      - mysqlVolume:/var/lib/mysql
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=cake
+      - MARIADB_DATABASE=cake
+  myapp:
+    image: daktela/cake:dev
+    ports:
+      - '8000:8000'
+    command: "create-and-up"
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    command: mysqld --character-set-server=utf8 --init-connect='SET NAMES UTF8;'
-
-volumes:
-  mysqlVolume:
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_USERNAME=cake
+      - DB_DATABASE=cake
+    volumes:
+      - './app:/var/www/html/'
+    depends_on:
+      - mariadb

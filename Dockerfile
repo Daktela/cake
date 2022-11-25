@@ -32,6 +32,7 @@ RUN mkdir -p $PROJECT_ROOT && \
     mkdir -p /var/log/nginx/ &&\
     mkdir -p /run/nginx/ &&\
     mkdir -p /home/www/ &&\
+    mkdir -p /var/log/php81/ &&\
     chown ${USER_NAME}:${USER_GROUP} -R ${PROJECT_ROOT} &&\
     chown ${USER_NAME}:${USER_GROUP} -R /var/log/nginx && \
     chown ${USER_NAME}:${USER_GROUP} -R /var/lib/nginx && \
@@ -45,6 +46,10 @@ WORKDIR $PROJECT_ROOT
 ENV PATH="/var/www/html/bin/:$PATH"
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+ENV ENV="/.ashrc"
+
+RUN echo 'alias project="entrypoint.sh"' > "$ENV"
 
 USER www
 
