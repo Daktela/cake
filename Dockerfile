@@ -32,7 +32,8 @@ ENV XDEBUG_HOST=host.docker.internal
 ENV XDEBUG_LOG_LEVEL=1
 ENV XDEBUG_MODE="off"
 
-RUN mkdir -p /var/lib/nginx/ &&\
+RUN mkdir -p $PROJECT_ROOT && \
+	mkdir -p /var/lib/nginx/ &&\
     mkdir -p /var/log/nginx/ &&\
     mkdir -p /run/nginx/ &&\
     chown ${USER_NAME}:${USER_GROUP} -R ${PROJECT_ROOT} &&\
