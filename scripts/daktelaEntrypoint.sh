@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 set -e
 
 BLUE='\033[0;34m'
@@ -13,15 +13,18 @@ composer clear-cache --quiet
 
 printf "${BLUE}Composer ready!${NC}\n"
 
-echo "
-  <?php
-    \$dsn['$MYSQL_DATABASE'] = [
-        'dsn' => 'mysql:host=$MYSQL_HOST:3306;dbname=$MYSQL_DATABASE',
-        'database' => '$MYSQL_DATABASE',
-        'user' => '$MYSQL_USER',
-        'pass' => '$MYSQL_PASSWORD'
-    ];
-  " > /tmp/databases.php
+if [ $MYSQL_DATABASE ] 
+then
+  echo "
+    <?php
+      \$dsn['$MYSQL_DATABASE'] = [
+          'dsn' => 'mysql:host=$MYSQL_HOST:3306;dbname=$MYSQL_DATABASE',
+          'database' => '$MYSQL_DATABASE',
+          'user' => '$MYSQL_USER',
+          'pass' => '$MYSQL_PASSWORD'
+      ];
+    " > /tmp/databases.php
+fi
 
 php /usr/local/bin/wait-for-mysql.php
 

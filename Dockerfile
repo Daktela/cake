@@ -1,22 +1,8 @@
 FROM daktela/php-fpm:8.1
 
+
 # Install PHP and other packages
-RUN dnf -q -y update && \
-    dnf -q -y install nginx php-xdebug git curl && \
-    dnf clean all
-    
-ARG NODE_VERSION=16.15.0
-ENV NVM_DIR /usr/bin/nvm
-ENV PATH="$NVM_DIR/versions/node/v$NODE_VERSION/bin/:/app/node_modules/.bin:${PATH}"
-RUN mkdir -p $NVM_DIR
-
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash \
-    && . $NVM_DIR/nvm.sh \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default
-
-RUN npm install --silent --global yarn
+RUN apk add --no-cache nginx git curl nodejs npm yarn
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
@@ -35,31 +21,32 @@ COPY ./config/nginx/nginx.conf /etc/nginx/nginx.conf
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 
-ENV USER_NAME=cake
-ENV USER_ID=99
-ENV USER_GUID=99
-
-RUN	groupadd -f ${USER_NAME} -g ${USER_GUID}
-RUN	useradd -s /bin/bash -g ${USER_NAME} -u ${USER_ID} ${USER_NAME}
-
+ENV USER_NAME=www   
+ENV USER_GROUP=www   
+ENV USER_ID=1000
+ENV USER_GUID=1000
 ENV PROJECT_ROOT="/var/www/html/"
 
-RUN mkdir -p /var/lib/nginx/ &&\
+RUN mkdir -p $PROJECT_ROOT && \
+	mkdir -p /var/lib/nginx/ &&\
     mkdir -p /var/log/nginx/ &&\
     mkdir -p /run/nginx/ &&\
+    mkdir -p /home/www/ &&\
     chown ${USER_NAME}:${USER_GROUP} -R ${PROJECT_ROOT} &&\
     chown ${USER_NAME}:${USER_GROUP} -R /var/log/nginx && \
     chown ${USER_NAME}:${USER_GROUP} -R /var/lib/nginx && \
     chown ${USER_NAME}:${USER_GROUP} -R /run/nginx/ && \
-    chown ${USER_NAME}:${USER_GROUP} -R /var/log/php-fpm/ && \
+    chown ${USER_NAME}:${USER_GROUP} -R /var/log/php81/ && \
+    chown ${USER_NAME}:${USER_GROUP} -R /home/www/ && \
     chown ${USER_NAME}:${USER_GROUP} -R /run/php-fpm/
 
 WORKDIR $PROJECT_ROOT
-USER ${USER_NAME}
 
 ENV PATH="/var/www/html/bin/:$PATH"
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+USER www
 
 EXPOSE 80
 
