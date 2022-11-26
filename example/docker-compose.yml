@@ -4,21 +4,31 @@ services:
   mariadb:
     image: mariadb:latest
     environment:
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
-      - ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD=secret
       - MARIADB_USER=cake
       - MARIADB_DATABASE=cake
+
   myapp:
     image: daktela/cake:dev
     ports:
       - '8000:8000'
-    command: "create-and-up"
+    command: "create-and-up 4.4.*"
     environment:
+      - USER=1000 # Default UID
       - DB_HOST=mariadb
       - DB_PORT=3306
-      - DB_USERNAME=cake
+      - DB_USERNAME=root
+      - DB_PASSWORD=secret
       - DB_DATABASE=cake
     volumes:
       - './app:/var/www/html/'
     depends_on:
       - mariadb
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8001:80
+    environment:
+      - PMA_HOST=mariadb
