@@ -1,7 +1,10 @@
 FROM daktela/php-fpm:8.1
 
 # Install PHP and other packages
-RUN apk add --no-cache nginx git curl nodejs npm yarn
+
+RUN apk update && \
+    apk upgrade --no-cache && \
+    apk add --no-cache nginx git curl nodejs npm yarn
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
