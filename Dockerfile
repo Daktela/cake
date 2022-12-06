@@ -8,15 +8,12 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 COPY ./config/nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY ./config/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./config/php/php-ini-xdebug.ini /etc/php.d/15-xdebug.ini
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 
 ENV PROJECT_ROOT="/var/www/html/"
 ENV OWNER="www-data:www-data"
-
-ENV XDEBUG_HOST=host.docker.internal
-ENV XDEBUG_LOG_LEVEL=1
-ENV XDEBUG_MODE="off"
 
 RUN mkdir -p $PROJECT_ROOT && \
 	mkdir -p /var/lib/nginx/ &&\
