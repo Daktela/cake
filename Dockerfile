@@ -36,7 +36,8 @@ RUN mkdir -p $PROJECT_ROOT && \
     chown $USER:$USER -R /run/php-fpm/ && \
     adduser $USER nginx &&\
     addgroup -g 1000 user &&\
-    adduser $USER user
+    adduser $USER user &&\
+    sed --in-place 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers 
 
 WORKDIR $PROJECT_ROOT
 
