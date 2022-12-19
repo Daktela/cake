@@ -5,7 +5,7 @@ NC='\033[0m' # No Color
 
 set -e
 
-OWNER=$USER:www-data 
+OWNER=www-data:www-data 
 
 case $1 in
 
