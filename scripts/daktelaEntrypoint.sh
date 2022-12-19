@@ -11,6 +11,10 @@ composer install --prefer-dist --no-interaction --classmap-authoritative
 composer dump-autoload --optimize
 composer clear-cache --quiet
 
+# Disable XDEBUG when installing
+XDEBUG_MODE_OLD=$XDEBUG_MODE
+XDEBUG_MODE=off
+
 printf "${BLUE}Composer ready!${NC}\n"
 
 if [ $MYSQL_DATABASE ] 
@@ -45,3 +49,6 @@ printf "${BLUE}Yarn install done!${NC}\n"
 cake cache clear_all
 
 printf "${BLUE}Cake cache cleared!${NC}\n"
+
+# Set previous XDEBUG mode 
+XDEBUG_MODE=$XDEBUG_MODE_OLD
