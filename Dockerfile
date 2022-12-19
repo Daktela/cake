@@ -16,7 +16,7 @@ COPY ./config/php/php-ini-xdebug.ini /etc/php81/conf.d/50-xdebug.ini
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 
 ENV PROJECT_ROOT="/var/www/html/"
-ENV OWNER="www-data:www-data"
+ENV OWNER="www-data"
 
 ENV XDEBUG_HOST=host.docker.internal
 ENV XDEBUG_LOG_LEVEL=1
@@ -27,13 +27,14 @@ RUN mkdir -p $PROJECT_ROOT && \
     mkdir -p /var/log/nginx/ &&\
     mkdir -p /run/nginx/ &&\
     mkdir -p /home/www/ &&\
-    chown $OWNER -R ${PROJECT_ROOT} &&\
-    chown $OWNER -R /var/log/nginx && \
-    chown $OWNER -R /var/lib/nginx && \
-    chown $OWNER -R /run/nginx/ && \
-    chown $OWNER -R /var/log/php81/ && \
-    chown $OWNER -R /home/www/ && \
-    chown $OWNER -R /run/php-fpm/
+    chown $OWNER:$OWNER -R ${PROJECT_ROOT} &&\
+    chown $OWNER:$OWNER -R /var/log/nginx && \
+    chown $OWNER:$OWNER -R /var/lib/nginx && \
+    chown $OWNER:$OWNER -R /run/nginx/ && \
+    chown $OWNER:$OWNER -R /var/log/php81/ && \
+    chown $OWNER:$OWNER -R /home/www/ && \
+    chown $OWNER:$OWNER -R /run/php-fpm/ && \
+    adduser $OWNER nginx
 
 WORKDIR $PROJECT_ROOT
 
