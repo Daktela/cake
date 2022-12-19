@@ -36,7 +36,7 @@ RUN mkdir -p $PROJECT_ROOT && \
     chown $OWNER:$OWNER -R /run/php-fpm/ && \
     adduser $OWNER nginx
 
-USER $OWNER
+
 
 WORKDIR $PROJECT_ROOT
 
@@ -54,6 +54,8 @@ RUN chmod +x /usr/local/bin/daktelaEntrypoint.sh
 RUN chmod +x /usr/local/bin/wait-for-mysql.php
 
 RUN ln /usr/local/bin/entrypoint.sh /usr/local/bin/project
+
+USER $OWNER
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
