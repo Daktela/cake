@@ -4,7 +4,7 @@ FROM daktela/php-fpm:8.1
 
 RUN apk update && \
     apk upgrade --no-cache && \
-    apk add --no-cache nginx git curl nodejs npm yarn
+    apk add --no-cache nginx git curl nodejs npm yarn sudo
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
@@ -34,7 +34,9 @@ RUN mkdir -p $PROJECT_ROOT && \
     chown $USER:$USER -R /var/log/php81/ && \
     chown $USER:$USER -R /home/www/ && \
     chown $USER:$USER -R /run/php-fpm/ && \
-    adduser $USER nginx
+    adduser $USER nginx &&\
+    addgroup -g 1000 user &&\
+    adduser $USER user
 
 WORKDIR $PROJECT_ROOT
 
