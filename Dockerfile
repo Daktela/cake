@@ -36,6 +36,8 @@ RUN mkdir -p $PROJECT_ROOT && \
     chown $OWNER:$OWNER -R /run/php-fpm/ && \
     adduser $OWNER nginx
 
+USER $OWNER
+
 WORKDIR $PROJECT_ROOT
 
 ENV PATH="/var/www/html/bin/:$PATH"
