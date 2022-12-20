@@ -37,7 +37,7 @@ RUN mkdir -p $PROJECT_ROOT && \
     adduser $USER nginx &&\
     addgroup -g 1000 user &&\
     adduser $USER user &&\
-    sed --in-place 's/^#\s*\(%wheel\s\+ALL=(ALL)\s\+NOPASSWD:\s\+ALL\)/\1/' /etc/sudoers 
+    echo "$USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/$USER
 
 WORKDIR $PROJECT_ROOT
 
