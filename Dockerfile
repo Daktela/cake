@@ -60,7 +60,7 @@ RUN apk add -t buildtools g++ make autoconf php81-pear php81-dev zlib-dev libeve
     pecl install raphf && \
     echo extension=raphf > /etc/php81/conf.d/00_raphf.ini && \
     yes | yes | yes | yes | yes | yes | pecl install pecl_http && \
-    echo extension=http.so > /etc/php81/conf.d/00_http.ini && \
+    echo extension=http.so > /etc/php81/conf.d/01_http.ini && \
     apk del buildtools
 
 #### REMOVE IN FUTURE ###
