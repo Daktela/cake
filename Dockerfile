@@ -54,6 +54,17 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/daktelaEntrypoint.sh
 RUN chmod +x /usr/local/bin/wait-for-mysql.php
 
+#### REMOVE IN FUTURE ###
+
+RUN apk add -t buildtools g++ make autoconf php81-pear php81-dev zlib-dev libevent-dev icu-dev libidn2-dev libidn-dev zlib libevent icu libidn2 libidn curl-dev && \
+    pecl install raphf && \
+    echo extension=raphf > /etc/php81/conf.d/00_raphf.ini && \
+    yes | yes | yes | yes | yes | yes | pecl install pecl_http && \
+    echo extension=http.so > /etc/php81/conf.d/00_http.ini && \
+    apk del buildtools
+
+#### REMOVE IN FUTURE ###
+
 RUN ln /usr/local/bin/entrypoint.sh /usr/local/bin/project
 
 USER $USER
