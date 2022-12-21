@@ -63,6 +63,8 @@ RUN apk add -t buildtools g++ make autoconf php81-pear php81-dev zlib-dev libeve
     echo extension=http.so > /etc/php81/conf.d/01_http.ini && \
     apk del buildtools
 
+RUN apk add libevent
+
 #### REMOVE IN FUTURE ###
 
 RUN ln /usr/local/bin/entrypoint.sh /usr/local/bin/project
