@@ -1,9 +1,10 @@
 FROM daktela/php-fpm:8.1
 
 # Install PHP and other packages
+
 RUN apk update && \
     apk upgrade --no-cache && \
-    apk add --no-cache nginx git curl nodejs npm yarn
+    apk add --no-cache nginx curl ncdu
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
@@ -14,24 +15,21 @@ COPY ./config/nginx/nginx.conf /etc/nginx/nginx.conf
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 
 ENV PROJECT_ROOT="/var/www/html/"
-ENV OWNER="www-data:www-data"
-
-ENV XDEBUG_HOST=host.docker.internal
-ENV XDEBUG_LOG_LEVEL=1
-ENV XDEBUG_MODE="off"
+ENV USER="www-data"
 
 RUN mkdir -p $PROJECT_ROOT && \
-	mkdir -p /var/lib/nginx/ &&\
+    mkdir -p /var/lib/nginx/ &&\
     mkdir -p /var/log/nginx/ &&\
     mkdir -p /run/nginx/ &&\
     mkdir -p /home/www/ &&\
-    chown $OWNER -R ${PROJECT_ROOT} &&\
-    chown $OWNER -R /var/log/nginx && \
-    chown $OWNER -R /var/lib/nginx && \
-    chown $OWNER -R /run/nginx/ && \
-    chown $OWNER -R /var/log/php81/ && \
-    chown $OWNER -R /home/www/ && \
-    chown $OWNER -R /run/php-fpm/
+    chown $USER:$USER -R ${PROJECT_ROOT} &&\
+    chown $USER:$USER -R /var/log/nginx && \
+    chown $USER:$USER -R /var/lib/nginx && \
+    chown $USER:$USER -R /run/nginx/ && \
+    chown $USER:$USER -R /var/log/php81/ && \
+    chown $USER:$USER -R /home/www/ && \
+    chown $USER:$USER -R /run/php-fpm/ && \
+    adduser $USER nginx
 
 WORKDIR $PROJECT_ROOT
 
@@ -49,6 +47,8 @@ RUN chmod +x /usr/local/bin/daktelaEntrypoint.sh
 RUN chmod +x /usr/local/bin/wait-for-mysql.php
 
 RUN ln /usr/local/bin/entrypoint.sh /usr/local/bin/project
+
+USER $USER
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
