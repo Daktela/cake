@@ -34,8 +34,8 @@ RUN mkdir -p $PROJECT_ROOT && \
     chown $USER:$USER -R /var/log/php81/ && \
     chown $USER:$USER -R /home/www/ && \
     chown $USER:$USER -R /run/php-fpm/ && \
-    mkdir -p /var/lib/nignx && \
-    chmod 777 -R /var/lib/nignx/tmp && \
+    mkdir -p /var/lib/nignx/tmp && \
+    chmod 777 -R /var/lib/nignx && \
     adduser $USER nginx &&\
     addgroup -g 1000 user &&\
     adduser $USER user &&\
