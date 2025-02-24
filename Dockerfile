@@ -1,4 +1,4 @@
-FROM daktela/php-fpm:8.1
+FROM daktela/php-fpm:8.2
 
 # Install PHP and other packages
 
