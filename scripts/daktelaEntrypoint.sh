@@ -7,9 +7,9 @@ NC='\033[0m' # No Color
 mkdir -p ./tmp
 mkdir -p ./logs
 
-composer install --prefer-dist --no-interaction --classmap-authoritative
-composer dump-autoload --optimize
-composer clear-cache --quiet
+php82 composer install --prefer-dist --no-interaction --classmap-authoritative
+php82 composer dump-autoload --optimize
+php82 composer clear-cache --quiet
 
 # Disable XDEBUG when installing
 XDEBUG_MODE_OLD=$XDEBUG_MODE
