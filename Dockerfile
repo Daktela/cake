@@ -59,9 +59,10 @@ RUN chmod +x /usr/local/bin/wait-for-mysql.php
 #### REMOVE IN FUTURE ###
 
 RUN apk add -t buildtools g++ make autoconf php82-pear php82-dev zlib-dev libevent-dev icu-dev libidn2-dev libidn-dev zlib libevent icu libidn2 libidn curl-dev && \
-    pecl82 install raphf && \
+    ln -s /usr/bin/pecl82 /usr/bin/pecl && \
+    pecl install raphf && \
     echo extension=raphf > /etc/php82/conf.d/00_raphf.ini && \
-    yes | yes | yes | yes | yes | yes | pecl82 install pecl_http && \
+    yes | yes | yes | yes | yes | yes | pecl install pecl_http && \
     echo extension=http.so > /etc/php82/conf.d/01_http.ini && \
     apk del buildtools
 

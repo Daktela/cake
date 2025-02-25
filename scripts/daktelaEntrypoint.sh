@@ -7,9 +7,9 @@ NC='\033[0m' # No Color
 mkdir -p ./tmp
 mkdir -p ./logs
 
-php82 /usr/local/bin/composer install --prefer-dist --no-interaction --classmap-authoritative
-php82 /usr/local/bin/composer dump-autoload --optimize
-php82 /usr/local/bin/composer clear-cache --quiet
+composer install --prefer-dist --no-interaction --classmap-authoritative
+composer dump-autoload --optimize
+composer clear-cache --quiet
 
 # Disable XDEBUG when installing
 XDEBUG_MODE_OLD=$XDEBUG_MODE
@@ -30,7 +30,7 @@ then
     " > /tmp/databases.php
 fi
 
-php82 /usr/local/bin/wait-for-mysql.php
+php /usr/local/bin/wait-for-mysql.php
 
 printf "${BLUE}Database connection ready!${NC}\n"
 
@@ -38,7 +38,7 @@ cake migrations migrate -vvv
 
 printf "${BLUE}Database migrations ready!${NC}\n"
 
-php82 /usr/local/bin/wait-for-mysql.php
+php /usr/local/bin/wait-for-mysql.php
 
 printf "${BLUE}Database ready!${NC}\n"
 
