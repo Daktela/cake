@@ -33,7 +33,7 @@ case $1 in
  
       printf "${BLUE}Starting webserver.${NC}\n"
 	
-      php-fpm81 -D
+      php-fpm82 -D
       nginx -g "daemon off;"
 
       fpm_pid=$(cat /run/php-fpm/php-fpm.pid)
@@ -43,7 +43,7 @@ case $1 in
     ;;
 
   serve)
-      php-fpm81 -D
+      php-fpm82 -D
       nginx -g "daemon off;"
 
       fpm_pid=$(cat /run/php-fpm/php-fpm.pid)
@@ -60,7 +60,7 @@ case $1 in
 
       printf "${BLUE}Starting webserver.${NC}\n"
 
-      php-fpm81 -D
+      php-fpm82 -D
       nginx -g "daemon off;"
     ;;
 

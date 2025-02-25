@@ -30,7 +30,7 @@ then
     " > /tmp/databases.php
 fi
 
-php /usr/local/bin/wait-for-mysql.php
+php82 /usr/local/bin/wait-for-mysql.php
 
 printf "${BLUE}Database connection ready!${NC}\n"
 
@@ -38,7 +38,7 @@ cake migrations migrate -vvv
 
 printf "${BLUE}Database migrations ready!${NC}\n"
 
-php /usr/local/bin/wait-for-mysql.php
+php82 /usr/local/bin/wait-for-mysql.php
 
 printf "${BLUE}Database ready!${NC}\n"
 
