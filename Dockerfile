@@ -1,4 +1,4 @@
-FROM daktela/php-fpm:8.1
+FROM daktela/php-fpm:8.2
 
 # Install PHP and other packages
 
@@ -11,7 +11,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 COPY ./config/nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY ./config/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY ./config/php/php-ini-xdebug.ini /etc/php81/conf.d/50-xdebug.ini
+COPY ./config/php/php-ini-xdebug.ini /etc/php82/conf.d/50-xdebug.ini
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 
@@ -31,7 +31,7 @@ RUN mkdir -p $PROJECT_ROOT && \
     chown $USER:$USER -R /var/log/nginx && \
     chown $USER:$USER -R /var/lib/nginx && \
     chown $USER:$USER -R /run/nginx/ && \
-    chown $USER:$USER -R /var/log/php81/ && \
+    chown $USER:$USER -R /var/log/php82/ && \
     chown $USER:$USER -R /home/www/ && \
     chown $USER:$USER -R /run/php-fpm/ && \
     mkdir -p /var/lib/nignx/tmp && \
@@ -58,11 +58,11 @@ RUN chmod +x /usr/local/bin/wait-for-mysql.php
 
 #### REMOVE IN FUTURE ###
 
-RUN apk add -t buildtools g++ make autoconf php81-pear php81-dev zlib-dev libevent-dev icu-dev libidn2-dev libidn-dev zlib libevent icu libidn2 libidn curl-dev && \
-    pecl install raphf && \
-    echo extension=raphf > /etc/php81/conf.d/00_raphf.ini && \
-    yes | yes | yes | yes | yes | yes | pecl install pecl_http && \
-    echo extension=http.so > /etc/php81/conf.d/01_http.ini && \
+RUN apk add -t buildtools g++ make autoconf php82-pear php82-dev zlib-dev libevent-dev icu-dev libidn2-dev libidn-dev zlib libevent icu libidn2 libidn curl-dev && \
+    pecl82 install raphf && \
+    echo extension=raphf > /etc/php82/conf.d/00_raphf.ini && \
+    yes | yes | yes | yes | yes | yes | pecl82 install pecl_http && \
+    echo extension=http.so > /etc/php82/conf.d/01_http.ini && \
     apk del buildtools
 
 RUN apk add libevent
