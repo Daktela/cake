@@ -10,7 +10,7 @@ OWNER=www-data:www-data
 case $1 in
 
   create)
-      php82 composer create-project --no-interaction --prefer-dist cakephp/app:"$2" .
+      php82 /usr/local/bin/composer create-project --no-interaction --prefer-dist cakephp/app:"$2" .
     ;;
 
   create-and-up)
@@ -18,7 +18,7 @@ case $1 in
       if [ -z "$(ls -A .)" ]; then
       	printf "${BLUE}Creating project.${NC}\n"
 
-      	php82 composer create-project --no-interaction --prefer-dist cakephp/app:"$2" .
+      	php82 /usr/local/bin/composer create-project --no-interaction --prefer-dist cakephp/app:"$2" .
 
         cp /tmp/app_local.example.php config/app_local.php
 
