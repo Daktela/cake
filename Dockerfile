@@ -6,7 +6,7 @@ RUN apk update && \
     apk upgrade --no-cache && \
     apk add --no-cache nginx git curl nodejs npm yarn sudo nano vim ncdu
 
-# Install Composer
+# Install Composer - bump version
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 COPY ./config/nginx/default.conf /etc/nginx/conf.d/default.conf
