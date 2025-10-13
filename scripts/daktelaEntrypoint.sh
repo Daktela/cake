@@ -17,7 +17,7 @@ XDEBUG_MODE=off
 
 printf "${BLUE}Composer ready!${NC}\n"
 
-if [ $MYSQL_DATABASE ] 
+if [ $MYSQL_DATABASE ]
 then
   echo "
     <?php
@@ -42,13 +42,13 @@ php /usr/local/bin/wait-for-mysql.php
 
 printf "${BLUE}Database ready!${NC}\n"
 
-yarn install --frozen-lockfile
+npm clean-install
 
-printf "${BLUE}Yarn install done!${NC}\n"
+printf "${BLUE}NPM install done!${NC}\n"
 
 cake cache clear_all
 
 printf "${BLUE}Cake cache cleared!${NC}\n"
 
-# Set previous XDEBUG mode 
+# Set previous XDEBUG mode
 XDEBUG_MODE=$XDEBUG_MODE_OLD

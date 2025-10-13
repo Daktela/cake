@@ -5,7 +5,7 @@ NC='\033[0m' # No Color
 
 set -e
 
-OWNER=www-data:www-data 
+OWNER=www-data:www-data
 
 case $1 in
 
@@ -30,10 +30,10 @@ case $1 in
         chmod -R 777 logs/
 
       fi
- 
+
       printf "${BLUE}Starting webserver.${NC}\n"
-	
-      php-fpm81 -D
+
+      php-fpm84 -D
       nginx -g "daemon off;"
 
       fpm_pid=$(cat /run/php-fpm/php-fpm.pid)
@@ -43,7 +43,7 @@ case $1 in
     ;;
 
   serve)
-      php-fpm81 -D
+      php-fpm84 -D
       nginx -g "daemon off;"
 
       fpm_pid=$(cat /run/php-fpm/php-fpm.pid)
@@ -60,7 +60,7 @@ case $1 in
 
       printf "${BLUE}Starting webserver.${NC}\n"
 
-      php-fpm81 -D
+      php-fpm84 -D
       nginx -g "daemon off;"
     ;;
 
