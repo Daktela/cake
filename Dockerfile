@@ -4,7 +4,7 @@ FROM daktela/php-fpm:8.2
 
 RUN apk update && \
     apk upgrade --no-cache && \
-    apk add --no-cache nginx git curl nodejs npm yarn sudo nano vim ncdu
+    apk add --no-cache nginx git curl nodejs npm yarn sudo nano vim ncdu openssh-client
 
 # Install Composer - bump version
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
